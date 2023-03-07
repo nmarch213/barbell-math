@@ -1,13 +1,34 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { CalculateWeightLbs } from "~/utils/CalcuateWeightLbs";
 
 type ShowWeightsProps = {
   weight: number;
   isLbs: boolean;
 };
 
+export type Weights = {
+  plate: number;
+  pairs: number | null;
+};
+
 function ShowWeights({ weight, isLbs }: ShowWeightsProps) {
   if (!weight) return null;
+
+  const barbell = 45;
+
+  const weights = [
+    { plate: 45, pairs: 2 },
+    { plate: 35, pairs: 1 },
+    { plate: 25, pairs: 1 },
+    { plate: 10, pairs: 1 },
+    { plate: 5, pairs: 1 },
+    { plate: 2.5, pairs: 1 },
+    { plate: 1.25, count: 1 },
+  ];
+
+  let weightToCalc = weight - barbell;
+
+  const plates = CalculateWeightLbs(weights, weightToCalc);
 
   return (
     <div>
@@ -18,6 +39,24 @@ function ShowWeights({ weight, isLbs }: ShowWeightsProps) {
           {weight && isLbs ? " lbs" : " kg"}
         </p>
       )}
+
+      <h2 className="text-2xl font-bold text-white">Barbell</h2>
+      <p className="text-2xl font-bold text-white">
+        {barbell}
+        {isLbs ? " lbs" : " kg"}
+      </p>
+
+      <h2 className="text-2xl font-bold text-white">Plates</h2>
+      {plates.map((plate, index) => {
+        if (plate) {
+          return (
+            <p key={index} className="text-2xl font-bold text-white">
+              {plate.count} x {plate.plate}
+              {isLbs ? " lbs" : " kg"}
+            </p>
+          );
+        }
+      })}
     </div>
   );
 }
