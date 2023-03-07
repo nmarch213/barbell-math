@@ -8,7 +8,7 @@ type ShowWeightsProps = {
 
 export type Weights = {
   plate: number;
-  pairs: number | null;
+  pairs: number;
 };
 
 function ShowWeights({ weight, isLbs }: ShowWeightsProps) {
@@ -23,10 +23,10 @@ function ShowWeights({ weight, isLbs }: ShowWeightsProps) {
     { plate: 10, pairs: 1 },
     { plate: 5, pairs: 1 },
     { plate: 2.5, pairs: 1 },
-    { plate: 1.25, count: 1 },
+    { plate: 1.25, pairs: 1 },
   ];
 
-  let weightToCalc = weight - barbell;
+  const weightToCalc = weight - barbell;
 
   const plates = CalculateWeightLbs(weights, weightToCalc);
 

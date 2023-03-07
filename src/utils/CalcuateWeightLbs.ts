@@ -1,4 +1,4 @@
-import { Weights } from "~/components/ShowWeights";
+import { type Weights } from "~/components/ShowWeights";
 
 export const CalculateWeightLbs = (
   weights: Weights[],
